@@ -112,6 +112,13 @@
                 },
             })
             .done(function (data) {
+
+                $("#addImgModal").modal('hide');
+
+                $('#upload_img_form')[0].reset();
+
+                bosalert('Ops', data.msg, 'success');
+
                 $.each(data.files, function (index, file) {
 
                     var thumbnail = $('<div class="col-xs-8 col-sm-6 col-md-4 col-lg-3">')

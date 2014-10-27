@@ -38,23 +38,29 @@ class Gallery extends My_Controller {
 
             $this->load->model("gallery_model");
 
-            $uploaded = $this->gallery_model->postObject();
+            $upload = $this->gallery_model->postObject();
 
-            if($uploaded){
+            if($upload['success']){
 
-                $response = $uploaded; // responde
+                $response = $upload['msg'];
+                $status_header = 200;
 
             } else {
 
-                $response = $uploaded['msg'];
+                $response = $upload['msg'];
+                $status_header = 400;
 
             }
 
+        } else {
 
-        } else
             $response = 'Nenhuma imagem recebida.';
+            $status_header = 400;
+
+        }
 
         $this->output
+            ->set_status_header($status_header)
             ->set_content_type('application/json')
             ->set_output(json_encode($response));
 

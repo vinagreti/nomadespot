@@ -80,51 +80,57 @@ class Gallery_model extends CI_Model {
 
     public function postObject( ){
 
-        $files = array();
+        try {
 
-        $desc = !empty($_POST['desc']) ? $_POST['desc'] : "";
+            $files = array();
 
-        foreach($_FILES['images']['tmp_name'] as $index => $value){
+            $desc = !empty($_POST['desc']) ? $_POST['desc'] : "";
 
-            $tmp_name = $_FILES['images']['tmp_name'][$index];
+            foreach($_FILES['images']['tmp_name'] as $index => $value){
 
-            $name = $_FILES['images']['name'][$index];
+                $tmp_name = $_FILES['images']['tmp_name'][$index];
 
-            $name = preg_replace('/\s+/', '', $name);
+                $name = $_FILES['images']['name'][$index];
 
-            $aws_file_uri = $this->folder . md5(uniqid(rand(), true));
+                $name = preg_replace('/\s+/', '', $name);
 
-            $uri = 'http://' . $this->bucket . '.s3.amazonaws.com/' . $aws_file_uri;
+                $aws_file_uri = $this->folder . md5(uniqid(rand(), true));
 
-            array_push($files, array('name' => $name, 'uri' => $uri));
+                $uri = 'http://' . $this->bucket . '.s3.amazonaws.com/' . $aws_file_uri;
 
-            if($this->s3->putObject($this->s3->inputFile($tmp_name), $this->bucket, $aws_file_uri, S3::ACL_PUBLIC_READ)){
+                array_push($files, array('name' => $name, 'uri' => $uri));
 
-                $data = array(
-                    'name' => $name
-                    , 'uri' => $uri
-                    ,  'desc' => $desc
-                );
+                if($this->s3->putObject($this->s3->inputFile($tmp_name), $this->bucket, $aws_file_uri, S3::ACL_PUBLIC_READ)){
 
-                $this->db->insert('images', $data);
+                    $data = array(
+                        'name' => $name
+                        , 'uri' => $uri
+                        ,  'desc' => $desc
+                    );
 
-                $res = array(
-                    "success" => true
-                    , "id" => $this->db->insert_id()
-                );
+                    $this->db->insert('images', $data);
 
-            } else {
+                    $res = array(
+                        "success" => true
+                        , "id" => $this->db->insert_id()
+                    );
 
-                $res = array(
-                    "success" => false
-                    , "msg" => 'Problemas ao enviar arquivos para o S3.'
-                );
+                }
 
             }
 
-        }
+            $res['files'] = $files;
 
-        $res['files'] = $files;
+            $res['msg'] = "Arquivos enviados com sucesso!";
+
+        } catch (Exception $e) {
+
+            $res = array(
+                "success" => false
+                , "msg" => 'Problemas ao enviar arquivos para o S3.'
+            );
+
+        }
 
         return $res;
 
