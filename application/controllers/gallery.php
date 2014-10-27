@@ -32,9 +32,7 @@ class Gallery extends My_Controller {
 
     public function images_upload(){
 
-        var_dump($_FILES);
-
-        $total_images = count($_FILES['images']['name']);
+        $total_images = !empty($_FILES['images']) ? count($_FILES['images']['name']) : 0;
 
         if( $total_images > 0 ){
 
@@ -44,19 +42,21 @@ class Gallery extends My_Controller {
 
             if($uploaded){
 
-                echo json_encode( $uploaded ); // responde
+                $response = $uploaded; // responde
 
             } else {
 
-                echo json_encode($uploaded['msg']);
+                $response = $uploaded['msg'];
 
             }
 
 
         } else
-            echo json_encode('A página espera por um POST.');
+            $response = 'Nenhuma imagem recebida.';
 
-        header('Content-Type: application/json'); // define o tipo de conteúdo no cabeçalho da resposta
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($response));
 
     }
 }

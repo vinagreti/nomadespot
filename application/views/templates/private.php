@@ -66,7 +66,6 @@
                 </button>
                 <a class="navbar-brand" rel="home" href="<?=base_url()?>" title="nomadespot.com">
                     <img id="nav_logo" src="<?=base_url()?>assets/img/logo_transparente.gif">
-                    <span id="contador"></span>
                 </a>
             </div>
 
@@ -183,29 +182,6 @@
 
     <!-- Carrega scripts dinamicamente -->
     <?php if( isset($arquivos_js) ) foreach( $arquivos_js as $key => $script ) echo '<script src="'.base_url().'assets/'.$script.'.js"></script>'; ?>
-
-    <!-- Contador da próxima trip -->
-    <script type="text/javascript">
-        (function atualizaContador() {
-            var hoje = new Date();  
-            var futuro = new Date(2014,12,26);
-            var ss = parseInt((futuro - hoje) / 1000);  
-            var dd = parseInt(ss / 24 / 60 / 60);
-            var mm = parseInt(dd / 30);
-            var dl = dd - (mm * 30);
-            var faltam = '';
-            faltam += (mm && mm > 1) ? '<span class="label label-warning">'+mm+' meses</span>' : ('<span class="label label-warning">'+mm==1 ? '1 mês</span>' : '');
-            faltam += ' ';
-            faltam += (dl && dl > 1) ? '<span class="label label-warning">'+dl+' dias</span>' : ('<span class="label label-warning">'+dl==1 ? '1 dia</span>' : '');
-            if (mm+dl > 0) {
-                document.getElementById('contador').innerHTML = faltam;   
-                setTimeout(atualizaContador,1000 * 60);  
-            } else {
-                document.getElementById('contador').innerHTML = 'É HOJE!!!!'; 
-                setTimeout(atualizaContador,1000 * 60);  
-            }
-        })();
-    </script>
 
     <!-- Google analytics -->
     <script>

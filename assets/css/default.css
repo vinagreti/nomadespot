@@ -30,7 +30,7 @@
 }
 
 body{
-    background-image:url(../img/bg_dotted.gif) !important;
+    background-image:url(../img/bg.gif) !important;
     word-wrap: break-word;
     text-align: justify;
     color: #A9A19D;
@@ -53,6 +53,7 @@ body{
 }
 /* margem do conteúdo */
 #template-content {
+    background-color: white;
     margin-left: 4%;
     margin-right: 4%;
 }

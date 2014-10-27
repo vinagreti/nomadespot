@@ -34,11 +34,22 @@
                     <h4 class="modal-title">Adicionar imagens</h4>
                 </div>
                 <div class="modal-body">
-                    <span id="uploadButton" class="btn btn-success btn-file">
-                        <i class="fa fa-upload"></i>
-                        Selecionar imagens
-                        <input type="file" id="image" name="images[]" multiple="multiple" accept="image/*" capture="camera" />
-                    </span>
+
+                    <div class="form-group">
+                        <label for="desc">Descrição</label>
+                        <input type="text" class="form-control" name="desc" placeholder="Insira uma descrição breve" />
+                    </div>
+
+                    <div class="form-group">
+                        <span id="uploadButton" class="btn btn-success btn-file btn-block">
+                            <i class="fa fa-upload"></i>
+                            Selecionar imagens
+                            <input type="file" id="image" name="images[]" multiple="multiple" accept="image/*" capture="camera" />
+                        </span>
+                    </div>
+
+                    <progress></progress>
+
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Salvar</button>
@@ -60,22 +71,29 @@
 
             var spinner = $('<i class="fa fa-spinner fa-spin"></i>');
 
-            var FormData = $(this).serializeObject();
+            var formData = new FormData($(this)[0]);
 
-            FormData.images = [];
-
-            $.each($(this).find("input[name^='images']")[0].files, function(i, file) {
-                FormData.images.push(file);
-            });
+            formData.append("csrf_token", csrf_token);
 
             $.ajax({
                 url:'images_upload',
-                data: FormData,
+                data: formData,
                 cache: false,
                 contentType: false,
                 processData: false,
                 type: 'POST',
                 dataType:'json',
+                xhr: function() {  // Custom XMLHttpRequest
+                    var myXhr = $.ajaxSettings.xhr();
+                    if(myXhr.upload){ // Check if upload property exists
+                        myXhr.upload.addEventListener('progress', function (e){
+                            if(e.lengthComputable){
+                                $('progress').attr({value:e.loaded,max:e.total});
+                            }
+                        }, false); // For handling the progress of the upload
+                    }
+                    return myXhr;
+                },
                 beforeSend: function () {
                     spinner.insertBefore($('#uploadButton'));
                     $('#uploadButton').attr('disabled', true);
@@ -101,6 +119,9 @@
                     miniatatures.append(thumbnail);
 
                 });
+            })
+            .fail(function (a, b, c) {
+                bosalert('Ops', a.responseText);
             });
 
             return false;
