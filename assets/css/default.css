@@ -29,11 +29,8 @@
 
 }
 
-html{
-    background-image:url(/assets/img/bg_dotted.gif);
-}
-
 body{
+    background-image:url(../img/bg_dotted.gif) !important;
     word-wrap: break-word;
     text-align: justify;
     color: #A9A19D;
