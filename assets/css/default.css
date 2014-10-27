@@ -1,0 +1,125 @@
+/*==================================================
+=            Bootstrap 3 Media Queries             =
+==================================================*/
+
+/*==========  Mobile First Method  ==========*/
+
+/* Custom, iPhone Retina */ 
+@media only screen and (min-width : 320px) {
+    
+}
+
+/* Extra Small Devices, Phones */ 
+@media only screen and (min-width : 480px) {
+
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 768px) {
+
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width : 992px) {
+
+}
+
+/* Large Devices, Wide Screens */
+@media only screen and (min-width : 1200px) {
+
+}
+
+html{
+    background-image:url(/assets/img/bg_dotted.gif);
+}
+
+body{
+    word-wrap: break-word;
+    text-align: justify;
+    color: #A9A19D;
+    text-shadow: 0px .2px .2px #A9A19D;
+
+}
+
+/*#########################################################*/
+/*###################### Thumbnails #######################*/
+/*#########################################################*/
+.thumbnail{
+    vertical-align: middle !important;
+}
+
+/*#########################################################*/
+/*################## Emplate margin #######################*/
+/*#########################################################*/
+.thumbnail{
+    vertical-align: middle !important;
+}
+/* margem do conteúdo */
+#template-content {
+    margin-left: 4%;
+    margin-right: 4%;
+}
+
+/* Conteúdo com 100% horizontal */
+#template-content .template-content-wide {
+    left: 0;
+    right: 0;
+}
+
+/*#########################################################*/
+/*###################### Títulos das páginas #########################*/
+/*#########################################################*/
+h1::first-letter, h2::first-letter, h3::first-letter, h4::first-letter, h5::first-letter, h6::first-letter{
+    font-weight: bold;
+    color:orange;
+    font-size: 125%;
+}
+
+/*#########################################################*/
+/*###################### Conteúdo #########################*/
+/*#########################################################*/
+body #template-content {
+    padding-top: 40px; 
+}
+body #template_sidebar { 
+    padding-top: 80px;
+}
+
+/*#########################################################*/
+/*###################### Footer ###########################*/
+/*#########################################################*/
+/* coloca o footer pro fim da pagina */
+body #template-content {
+    min-height: calc(100vh - 155px);
+}
+
+#template_footer {
+    color: white;
+    padding: 15px 0px;
+    background-color: #34495e;
+}
+
+/*#########################################################*/
+/*###################### dropdown /*######################*/
+/*#########################################################*/
+/* Abre o dropdown ao passar o mouse */
+/* apenas em telas menores que 992 - o qual foi definido o collapse do navbar */
+/* apenas no nav */
+@media (min-width: 992px) {
+    .nav .dropdown:hover .dropdown-menu { display: block; }
+}
+
+/* Logo no navbar */
+#nav_logo {
+    max-height:60px;
+    margin-top: -20px;
+}
+
+/* efeito de click em elementos */
+.click {
+    cursor: pointer;
+}
+
+.img-responsive {
+    margin: 0 auto;
+}
