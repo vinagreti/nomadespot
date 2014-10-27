@@ -77,7 +77,7 @@ var nsp_articles = new function () {
 
 	self.triggerPublicView = function() {
 
-		var itemHtmlCopy = $('.articlePublicListItem').clone().removeClass('hide');
+		var itemHtmlCopy = $('.articlePublicListItem').clone().removeClass('hidden');
 
 		$('.articlePublicListItem').remove();
 
@@ -90,14 +90,14 @@ var nsp_articles = new function () {
 
 				switch (article.media_kind) {
 					case "img" :
-						itemHtml.find('iframe').parent().hide();
+						itemHtml.find('iframe').parent().hidden();
 					break;
 					case "iframe" :
-						itemHtml.find('img').hide();
+						itemHtml.find('img').hidden();
 					break;
 					default :
-					itemHtml.find('iframe').parent().hide();
-					itemHtml.find('img').hide();
+					itemHtml.find('iframe').parent().hidden();
+					itemHtml.find('img').hidden();
 				}
 
 				itemHtml.dataBind(article);

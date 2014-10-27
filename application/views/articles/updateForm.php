@@ -22,7 +22,7 @@
 
     <div class="form-group">
         <textarea class="form-control" id="editor1"></textarea>
-        <textarea class="hide" name="content" id="content"></textarea>
+        <textarea class="hidden" name="content" id="content"></textarea>
     </div>
 
     <div class="form-group bostag">
@@ -30,7 +30,7 @@
             <div class="col-xs-20">
                 <input class="form-control bostag_input" type="text" placeholder="Digite o nome da tag" autocomplete="off">
                 <div class="bostag_labels"></div>
-                <select class="bostag_multiselect hide" name="tags" multiple></select>
+                <select class="bostag_multiselect hidden" name="tags" multiple></select>
             </div>
             <div class="col-xs-4">
                 <button type="button" class="bostag_add_button btn btn-success btn-block"><i class="fa fa-plus"></i> Criar tag</button>

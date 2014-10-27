@@ -10,7 +10,7 @@ var nsp_todo = new function () {
 	        , todayHighlight: true
 	        , keyboardNavigation: true
 	    }).on('changeDate', function(e){
-	        $(this).datepicker('hide');
+	        $(this).datepicker('hidden');
 	    });
 
 	    $('#todoCreateForm #country_typeahead').typeahead({
@@ -40,7 +40,7 @@ var nsp_todo = new function () {
 	        , todayHighlight: true
 	        , keyboardNavigation: true
 	    }).on('changeDate', function(e){
-	        $(this).datepicker('hide');
+	        $(this).datepicker('hidden');
 	    });
 
 	    $('#todoUpdateForm #country_typeahead').typeahead({

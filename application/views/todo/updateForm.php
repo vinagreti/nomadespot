@@ -76,7 +76,7 @@
                 </div>
             </div>
             <div class="bostag_labels"></div>
-            <select class="bostag_multiselect hide" name="tags" multiple></select>
+            <select class="bostag_multiselect hidden" name="tags" multiple></select>
         </div>
     </div>
 

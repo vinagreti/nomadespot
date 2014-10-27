@@ -30,7 +30,7 @@ class Gallery_model extends CI_Model {
         $this->db->select('images.id');
         $this->db->select('images.name');
         $this->db->select('images.uri');
-        $this->db->select('images.thumb');
+        $this->db->select('images.desc');
         $this->db->from('images');
 
         if( $limit ) {
@@ -82,6 +82,8 @@ class Gallery_model extends CI_Model {
 
         $files = array();
 
+        $desc = !empty($_POST['desc']) ? $_POST['desc'] : "";
+
         foreach($_FILES['images']['tmp_name'] as $index => $value){
 
             $tmp_name = $_FILES['images']['tmp_name'][$index];
@@ -101,6 +103,7 @@ class Gallery_model extends CI_Model {
                 $data = array(
                     'name' => $name
                     , 'uri' => $uri
+                    ,  'desc' => $desc
                 );
 
                 $this->db->insert('images', $data);

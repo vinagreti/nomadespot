@@ -1,7 +1,7 @@
 <h1 class="page-header">Artigos</h1>
 
 <div class="articlePublicList">
-	<div class="articlePublicListItem hide">
+	<div class="articlePublicListItem hidden">
 		<h2 class="title text-center"></h2>
 		<p class="creation_date text-center"></p>
 		<img class="image img-responsive img-rounded pull-center" src="">

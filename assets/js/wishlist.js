@@ -10,7 +10,7 @@ var nsp_wishlist = new function () {
 	        , todayHighlight: true
 	        , keyboardNavigation: true
 	    }).on('changeDate', function(e){
-	        $(this).datepicker('hide');
+	        $(this).datepicker('hidden');
 	    });
 
 	    $('#wishlistCreateForm #select_deadline').on('click', function () {
@@ -36,7 +36,7 @@ var nsp_wishlist = new function () {
 	        , todayHighlight: true
 	        , keyboardNavigation: true
 	    }).on('changeDate', function(e){
-	        $(this).datepicker('hide');
+	        $(this).datepicker('hidden');
 	    });
 
 	    $('#wishlistUpdateForm #select_deadline').on('click', function () {

@@ -41,18 +41,22 @@
                     </div>
 
                     <div class="form-group">
-                        <span id="uploadButton" class="btn btn-success btn-file btn-block">
+                        <span class="btn btn-success btn-file btn-block">
                             <i class="fa fa-upload"></i>
                             Selecionar imagens
                             <input type="file" id="image" name="images[]" multiple="multiple" accept="image/*" capture="camera" />
                         </span>
                     </div>
 
-                    <progress></progress>
+                    <div class="progress hidden">
+                      <div id="upload_img_progress" class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                        0%
+                      </div>
+                    </div>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <button type="submit" class="btn btn-primary" data-loading-text="Enviando...">Salvar</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
                 </div>
             </form>
@@ -68,8 +72,6 @@
         $('#upload_img_form').on('submit', function (e) {
 
             e.preventDefault();
-
-            var spinner = $('<i class="fa fa-spinner fa-spin"></i>');
 
             var formData = new FormData($(this)[0]);
 
@@ -88,19 +90,25 @@
                     if(myXhr.upload){ // Check if upload property exists
                         myXhr.upload.addEventListener('progress', function (e){
                             if(e.lengthComputable){
-                                $('progress').attr({value:e.loaded,max:e.total});
+                                var percentage = 100/(e.total/e.loaded);
+                                $('#upload_img_form .progress-bar')
+                                    .attr('aria-valuenow', percentage)
+                                    .css('width', percentage+"%")
+                                    .text(percentage+"%");
                             }
                         }, false); // For handling the progress of the upload
                     }
                     return myXhr;
                 },
                 beforeSend: function () {
-                    spinner.insertBefore($('#uploadButton'));
-                    $('#uploadButton').attr('disabled', true);
+                    $('#upload_img_form .form-group').addClass('hidden');
+                    $('#upload_img_form .progress').removeClass('hidden');
+                    $('#upload_img_form [type="submit"]').button('loading');
                 },
                 complete: function () {
-                    spinner.remove();
-                    $('#uploadButton').attr('disabled', false);
+                    $('#upload_img_form .progress').addClass('hidden');
+                    $('#upload_img_form .form-group').removeClass('hidden');
+                    $('#upload_img_form [type="submit"]').button('reset');
                 },
             })
             .done(function (data) {
