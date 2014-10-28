@@ -6,9 +6,9 @@ class Welcome extends My_Controller {
 
     	$data = array();
 
-        $this->load->model("gallery_model");
+        $this->load->model("images_model");
 
-        $data['images'] = $this->gallery_model->getObjects()['digest'];
+        $data['images'] = $this->images_model->getObjects()['digest'];
 
         $conteudo = $this->load->view('welcome/index', $data, true);
 
