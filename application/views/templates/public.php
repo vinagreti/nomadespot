@@ -88,8 +88,14 @@
                         </ul>
                     </li>
                     <li class="<?php if($this->router->class == 'articles') echo 'active'; ?>"><a href="<?=base_url()?>articles">Artigos</a></li>
-                    <li class="<?php if($this->router->class == 'gallery') echo 'active'; ?>"><a href="<?=base_url()?>gallery">Galeria</a></li>
-                    <li class="<?php if($this->router->class == 'contact') echo 'active'; ?>"><a href="<?=base_url()?>contact">Contato</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Galeria <span class="caret"></span></a>
+                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                            <li><a href="<?=base_url()?>audios">Audio</a></li>
+                            <li><a href="<?=base_url()?>images">Imagem</a></li>
+                            <li><a href="<?=base_url()?>videos">Vídeo</a></li>
+                        </ul>
+                    </li>                    <li class="<?php if($this->router->class == 'contact') echo 'active'; ?>"><a href="<?=base_url()?>contact">Contato</a></li>
                     <li class="<?php if($this->router->class == 'services') echo 'active'; ?>"><a href="<?=base_url()?>services">Serviços</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

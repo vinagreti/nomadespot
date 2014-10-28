@@ -45,12 +45,12 @@ body{
     vertical-align: middle !important;
 }
 
+.gallery-thumbnail{
+    border-color: blue;
+}
 /*#########################################################*/
 /*################## Emplate margin #######################*/
 /*#########################################################*/
-.thumbnail{
-    vertical-align: middle !important;
-}
 /* margem do conteúdo */
 #template-content {
     background-color: white;
