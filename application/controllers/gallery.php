@@ -14,22 +14,6 @@ class Gallery extends My_Controller {
 
     }
 
-    public function images() {
-
-        $this->load->model("gallery_model");
-
-        $gpa = $this->gallery_model->getObjects();
-
-        $data = array('gpa' => $gpa['digest'], 'bucket' => 'guaraniporai');
-
-        $conteudo = $this->load->view('gallery/images', $data, true);
-
-        $css_files = array('css/bootstrap3-button-file');
-
-        $this->template->load($conteudo, null, $css_files, null); // carrega a pagina inicial
-
-    }
-
     public function images_upload(){
 
         $total_images = !empty($_FILES['images']) ? count($_FILES['images']['name']) : 0;

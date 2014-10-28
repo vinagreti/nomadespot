@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Gallery_model extends CI_Model {
+class Images_model extends CI_Model {
 
     private $bucket = 'guaraniporai';
     private $folder = 'uploads/images/';
@@ -31,6 +31,7 @@ class Gallery_model extends CI_Model {
         $this->db->select('images.name');
         $this->db->select('images.uri');
         $this->db->select('images.desc');
+        $this->db->select('images.privacy');
         $this->db->from('images');
 
         if( $limit ) {
@@ -138,13 +139,13 @@ class Gallery_model extends CI_Model {
 
     public function getObject( $id ){
 
-        $this->db->select('articles.id');
-        $this->db->select('articles.title');
-        $this->db->select('articles.content');
-        $this->db->select('articles.creation_date');
-        $this->db->select('articles.last_update');
-        $this->db->where('articles.id', $id);
-        $this->db->from('articles');
+        $this->db->select('images.id');
+        $this->db->select('images.name');
+        $this->db->select('images.uri');
+        $this->db->select('images.desc');
+        $this->db->select('images.privacy');
+        $this->db->where('images.id', $id);
+        $this->db->from('images');
 
         $object =  $this->db->get()->row();
 
@@ -159,7 +160,7 @@ class Gallery_model extends CI_Model {
 
             $res = array(
                 "success" => false
-                , "msg" => "Erro ao carregar artigo. Tente novamente mais tarde."
+                , "msg" => "Erro ao carregar imagem. Tente novamente mais tarde."
             );
 
         }
@@ -171,17 +172,17 @@ class Gallery_model extends CI_Model {
     public function deleteObject( $id ){
 
         $this->db->where('id', $id); // remove o usuario do banco
-        $removido = $this->db->delete('articles');
+        $removido = $this->db->delete('images');
 
         if($removido){
             $res = array( // define a resposta
                 "success" => true // define como success
-                , "msg" => 'Artigo removido com success' // insre o resumo
+                , "msg" => 'Imagem removida com success' // insre o resumo
             );
         } else {
             $res = array( // define a resposta
                 "success" => false // define como falha
-                , "msg" => 'Problema ao remover artigo. Tente novamente mais tarde.' // insre o resumo
+                , "msg" => 'Problema ao remover imagem. Tente novamente mais tarde.' // insre o resumo
             );
         }
 
@@ -189,4 +190,30 @@ class Gallery_model extends CI_Model {
 
     }
 
+    public function patchObject( $id, $data ){
+
+        if(isset($data['privacy'])) {
+
+            $this->db->set('privacy', $data['privacy']);
+
+        }
+
+        $this->db->where('id', $id); // remove o usuario do banco
+        $removido = $this->db->update('images');
+
+        if($removido){
+            $res = array( // define a resposta
+                "success" => true // define como success
+                , "msg" => 'Imagem atualizada com success' // insre o resumo
+            );
+        } else {
+            $res = array( // define a resposta
+                "success" => false // define como falha
+                , "msg" => 'Problema ao remover imagem. Tente novamente mais tarde.' // insre o resumo
+            );
+        }
+
+        return $res;
+
+    }
 }

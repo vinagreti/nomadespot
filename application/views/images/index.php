@@ -10,14 +10,25 @@
     <?php
         if(count($gpa) > 0 ){
             foreach($gpa as $index => $img){
-                $thumbnail = '<div class="col-xs-8 col-sm-6 col-md-4 col-lg-3" style="word-break:break-all;">';
+                $thumbnail = "";
+                if($index == 0 || ($index) % 6 == 0) $thumbnail .= '<div class="row">';
+                $thumbnail .= '<div class="col-sm-4">';
                 $thumbnail .= '<div class="thumbnail">';
-                $thumbnail .= '<a href="'.$img->uri.'" alt="'.$img->name.'" target="_blank"><img src="http://imagestore.nomadespot.com/150/'.$img->uri.'" alt="'.$img->name.'"></a>';
+                $thumbnail .= '<a href="'.$img->uri.'" alt="'.$img->name.'" target="_blank"><img src="http://imagestore.nomadespot.com/150/'.$img->uri.'" alt="'.$img->name.'" ></a>';
+                $thumbnail .= '<div class="caption">';
+                $thumbnail .= '<p>'.$img->desc.'</p>';
+                if($img->privacy){
+                    $thumbnail .= '<p><button type="button" class="btn btn-success btn-block" role="button" value="0" data-id="'.$img->id.'" data-loading-text="Alterando...">Publico</button></p>';
+                    $thumbnail .= '<p><button type="button" class="btn btn-danger btn-block hidden" role="button" value="1" data-id="'.$img->id.'" data-loading-text="Alterando...">Privado</button></p>';
+                } else {
+                    $thumbnail .= '<p><button type="button" class="btn btn-success btn-block hidden" role="button" value="0" data-id="'.$img->id.'" data-loading-text="Alterando...">Publico</button></p>';
+                    $thumbnail .= '<p><button type="button" class="btn btn-danger btn-block" role="button" value="1" data-id="'.$img->id.'" data-loading-text="Alterando...">Privado</button></p>';
+                }
                 $thumbnail .= '</div>';
                 $thumbnail .= '</div>';
+                $thumbnail .= '</div>';
+                if(($index + 1) % 6 == 0) $thumbnail .= '</div>';
                 echo $thumbnail;
-                if($index % 4 == 0)
-                    echo '<div class="clearfix"></div>';
             }
         } else {
             echo '<div class="col-xs-24 miniatures_text">Sem imagens</div>';
@@ -67,6 +78,48 @@
 <script type="text/javascript">
     window.onload = function(){
 
+        $(".thumbnail button").on("click", function (e) {
+
+            var button = $(this);
+
+            button.button('loading');
+
+            var privacy = $(this).val();
+
+            var id = $(this).data('id');
+
+            $.ajax({
+
+                url: "?id="+id
+
+                , type: "PATCH"
+
+                , data: {
+
+                    privacy: privacy
+
+                }
+
+            })
+
+            .done(function (res) {
+
+                var privacy = res.privacy == 1 ? 0 : 1;
+
+                button.parents('.thumbnail').find('button').addClass("hidden");
+
+                button.parents('.thumbnail').find('button[value="'+privacy+'"]').removeClass("hidden");
+
+            })
+
+            .always(function (res) {
+
+                button.button('reset');
+
+            });
+
+        });
+
         var miniatatures = $('#miniatures');
 
         $('#upload_img_form').on('submit', function (e) {
@@ -78,7 +131,7 @@
             formData.append("csrf_token", csrf_token);
 
             $.ajax({
-                url:'images_upload',
+                url:'',
                 data: formData,
                 cache: false,
                 contentType: false,
@@ -95,6 +148,12 @@
                                     .attr('aria-valuenow', percentage)
                                     .css('width', percentage+"%")
                                     .text(percentage+"%");
+
+                                if(percentage > 99){
+
+                                    $('#upload_img_form .progress-bar').text("Aguarde! Processando...");
+
+                                }
                             }
                         }, false); // For handling the progress of the upload
                     }

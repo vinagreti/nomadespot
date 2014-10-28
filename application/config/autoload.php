@@ -37,7 +37,7 @@
 |
 */
 
-$autoload['packages'] = array('template', 'database', 'session');
+$autoload['packages'] = array();
 
 
 /*

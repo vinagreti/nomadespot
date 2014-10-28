@@ -90,14 +90,14 @@ var nsp_articles = new function () {
 
 				switch (article.media_kind) {
 					case "img" :
-						itemHtml.find('iframe').parent().hidden();
+						itemHtml.find('iframe').parent().addClass('hidden');
 					break;
 					case "iframe" :
-						itemHtml.find('img').hidden();
+						itemHtml.find('img').addClass('hidden');
 					break;
 					default :
-					itemHtml.find('iframe').parent().hidden();
-					itemHtml.find('img').hidden();
+					itemHtml.find('iframe').parent().addClass('hidden');
+					itemHtml.find('img').addClass('hidden');
 				}
 
 				itemHtml.dataBind(article);
