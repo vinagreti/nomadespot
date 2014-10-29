@@ -191,6 +191,8 @@ class Articles extends My_Controller {
 
     public function patchObject( $id, $data ){
 
+        var_dump($id);
+
         $this->load->model("articles_model");
 
         $patchObject = $this->articles_model->patchObject( $id, $data );

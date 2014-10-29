@@ -39,7 +39,7 @@ function bosalert(titulo, mensagem, tipo_alerta, tempo) {
     setTimeout(function(){
 
         // remove o alerta do corpo do documento
-        alerta.remove();
+        //alerta.remove();
 
     }, tempo);
 

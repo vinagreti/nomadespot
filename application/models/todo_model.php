@@ -91,7 +91,7 @@ class Todo_model extends CI_Model {
                 , 'desc' => $data['desc']
                 , 'deadline' => $data['deadline']
                 , 'status' => $data['status']
-                , 'country_id' => $data['country_id']
+                , 'country_id' => is_int($data['country_id']) ? $data['country_id'] : ""
                 , 'user_id' => $data['user_id']
             );
 
