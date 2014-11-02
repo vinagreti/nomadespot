@@ -3,8 +3,8 @@ var images = new function () {
     var images_url = base_url+"images";
     var images_raw = false;
     var screen_container = $('#miniatures');
-    var gallery_thumb = $("#gallery-thumb-sample").clone().removeClass("hide");;
-    $("#gallery-thumb-sample").remove();
+    var gallery_thumb = screen_container.find(".gallery-thumb").clone().removeClass("hide");;
+    screen_container.find(".gallery-thumb").remove();
 
     var imagesClass = {
 
@@ -198,11 +198,7 @@ var images = new function () {
         }
         , removeFromRemote: function(id) {
 
-            console.log(id);
-
-            var button = screen_container.find('.delete-img[data-id="'+ id +'"]');
-
-            console.log(button[0]);
+            var button = screen_container.find('.delete-image[data-id="'+ id +'"]');
 
             $.ajax({
 
@@ -211,8 +207,6 @@ var images = new function () {
                 , type: "DELETE"
 
             }).done(function (res) {
-
-                console.log('deletou');
 
                 button.parents('.gallery-thumb').remove();
 

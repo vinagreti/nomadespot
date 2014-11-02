@@ -7,7 +7,7 @@
 </h1>
 
 <div id="miniatures" class="row">
-    <div id="gallery-thumb-sample" class="col-sm-4 hide">
+    <div class="col-sm-4 hide gallery-thumb">
         <div class="thumbnail">
             <a href="" alt="" target="_blank"><img src="http://imagestore.nomadespot.com/150" alt="" ></a>
             <div class="caption">
