@@ -103,8 +103,6 @@ class Images_model extends CI_Model {
 
                 $uri = 'http://' . $this->bucket . '.s3-sa-east-1.amazonaws.com/' . $aws_file_uri;
 
-                array_push($files, array('name' => $name, 'uri' => $uri, 'desc' => $_POST['desc']));
-
                 if($this->s3->putObject($this->s3->inputFile($tmp_name), $this->bucket, $aws_file_uri, S3::ACL_PUBLIC_READ)){
 
                     $data = array(
@@ -116,15 +114,13 @@ class Images_model extends CI_Model {
 
                     $this->db->insert('images', $data);
 
-                    $res = array(
-                        "success" => true
-                        , "id" => $this->db->insert_id()
-                    );
+                    array_push($files, array('name' => $name, 'uri' => $uri, 'desc' => $_POST['desc'], 'id' => $this->db->insert_id()));
 
                 }
 
             }
 
+            $res["success"] = true;
             $res['files'] = $files;
 
             $res['msg'] = "Arquivos enviados com sucesso!";
