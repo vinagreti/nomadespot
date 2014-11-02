@@ -2,13 +2,14 @@
 
 class Images_model extends CI_Model {
 
-    private $bucket = 'guaraniporai';
-    private $folder = 'uploads/images/';
+    private $bucket; // S3 Bucket
+    private $folder; // images folder
 
     function __construct(){
 
-                // Load Library
-        $this->load->library('s3');
+        // set class variables
+        $this->bucket = (ENVIRONMENT == 'production') ? 'nomadespot' : 'nomadespot-dev';
+        $this->folder = 'uploads/images/';
 
     }
 
@@ -31,7 +32,7 @@ class Images_model extends CI_Model {
         $this->db->select('images.name');
         $this->db->select('images.uri');
         $this->db->select('images.desc');
-        $this->db->select('images.privacy');
+        $this->db->select('images.private');
         $this->db->from('images');
 
         if( $limit ) {
@@ -83,6 +84,9 @@ class Images_model extends CI_Model {
 
         try {
 
+            // Load Library
+            $this->load->library('s3');
+
             $files = array();
 
             $desc = !empty($_POST['desc']) ? $_POST['desc'] : "";
@@ -97,9 +101,9 @@ class Images_model extends CI_Model {
 
                 $aws_file_uri = $this->folder . md5(uniqid(rand(), true));
 
-                $uri = 'http://' . $this->bucket . '.s3.amazonaws.com/' . $aws_file_uri;
+                $uri = 'http://' . $this->bucket . '.s3-sa-east-1.amazonaws.com/' . $aws_file_uri;
 
-                array_push($files, array('name' => $name, 'uri' => $uri));
+                array_push($files, array('name' => $name, 'uri' => $uri, 'desc' => $_POST['desc']));
 
                 if($this->s3->putObject($this->s3->inputFile($tmp_name), $this->bucket, $aws_file_uri, S3::ACL_PUBLIC_READ)){
 
@@ -143,7 +147,7 @@ class Images_model extends CI_Model {
         $this->db->select('images.name');
         $this->db->select('images.uri');
         $this->db->select('images.desc');
-        $this->db->select('images.privacy');
+        $this->db->select('images.private');
         $this->db->where('images.id', $id);
         $this->db->from('images');
 
@@ -171,19 +175,41 @@ class Images_model extends CI_Model {
 
     public function deleteObject( $id ){
 
-        $this->db->where('id', $id); // remove o usuario do banco
-        $removido = $this->db->delete('images');
+        $this->db->where('images.id', $id);
+        $this->db->from('images');
 
-        if($removido){
-            $res = array( // define a resposta
-                "success" => true // define como success
-                , "msg" => 'Imagem removida com success' // insre o resumo
-            );
+        $object =  $this->db->get()->row();
+
+        if(isset($object->uri)){
+
+            $this->db->where('id', $id); // remove o usuario do banco
+            $removido = $this->db->delete('images');
+
+            if($removido){
+
+                // Load Library
+                $this->load->library('s3');
+
+                $this->s3->deleteObject($this->bucket, $object->uri, S3::ACL_PUBLIC_READ)
+
+                $res = array( // define a resposta
+                    "success" => true // define como success
+                    , "msg" => 'Imagem removida com success' // insre o resumo
+                );
+            } else {
+                $res = array( // define a resposta
+                    "success" => false // define como falha
+                    , "msg" => 'Problema ao remover imagem. Tente novamente mais tarde.' // insre o resumo
+                );
+            }
+
         } else {
+
             $res = array( // define a resposta
                 "success" => false // define como falha
-                , "msg" => 'Problema ao remover imagem. Tente novamente mais tarde.' // insre o resumo
+                , "msg" => 'Problema ao remover imagem. Imagem não encontrada.' // insre o resumo
             );
+
         }
 
         return $res;
@@ -192,9 +218,9 @@ class Images_model extends CI_Model {
 
     public function patchObject( $id, $data ){
 
-        if(isset($data['privacy'])) {
+        if(isset($data['private'])) {
 
-            $this->db->set('privacy', $data['privacy']);
+            $this->db->set('private', $data['private']);
 
         }
 

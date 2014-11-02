@@ -56,62 +56,66 @@
 
     <nav class="navbar navbar-fixed-top navbar-default" role="navigation">
         <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu_collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" rel="home" href="<?=base_url()?>" title="nomadespot.com">
-                    <img id="nav_logo" src="<?=base_url()?>assets/img/logo_transparente.gif">
-                </a>
-            </div>
+            <div class="row">
+                <div class="col-sm-24 col-md-offset-1 col-md-22">
+                     <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu_collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" rel="home" href="<?=base_url()?>" title="nomadespot.com">
+                            <img id="nav_logo" src="<?=base_url()?>assets/img/logo_transparente.gif">
+                        </a>
+                    </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="menu_collapse">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">O Projeto <span class="caret"></span></a>
-                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                            <li class="<?php if($this->router->class == 'project') echo 'active'; ?>"><a href="<?=base_url()?>project">História</a></li>
-                            <li class="<?php if($this->router->class == 'sponsorship') echo 'active'; ?>"><a href="<?=base_url()?>sponsorship">Patrocínio e Apoio</a></li>
-                            <li class="<?php if($this->router->class == 'car') echo 'active'; ?>"><a href="<?=base_url()?>car">O carro</a></li>
-                            <li class="<?php if($this->router->class == 'crew') echo 'active'; ?>"><a href="<?=base_url()?>crew">Tripulação</a></li>
-                            <li class="<?php if($this->router->class == 'itinerary') echo 'active'; ?>"><a href="<?=base_url()?>itinerary">Percurso</a></li>
-                            <li class="<?php if($this->router->class == 'donate') echo 'active'; ?>"><a href="<?=base_url()?>donate">Doação</a></li>
-                            <li class="<?php if($this->router->class == 'accounting') echo 'active'; ?>"><a href="<?=base_url()?>accounting">Contabilidade</a></li>
-                            <li class="<?php if($this->router->class == 'wishlist') echo 'active'; ?>"><a href="<?=base_url()?>wishlist">Lista de desejos</a></li>
-                            <li class="<?php if($this->router->class == 'inspirations') echo 'active'; ?>"><a href="<?=base_url()?>inspirations">Inspirações</a></li>
-                            <li class="<?php if($this->router->class == 'hostus') echo 'active'; ?>"><a href="<?=base_url()?>hostus">Hospede-nos</a></li>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="menu_collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">O Projeto <span class="caret"></span></a>
+                                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <li class="<?php if($this->router->class == 'project') echo 'active'; ?>"><a href="<?=base_url()?>project">História</a></li>
+                                    <li class="<?php if($this->router->class == 'sponsorship') echo 'active'; ?>"><a href="<?=base_url()?>sponsorship">Patrocínio e Apoio</a></li>
+                                    <li class="<?php if($this->router->class == 'car') echo 'active'; ?>"><a href="<?=base_url()?>car">O carro</a></li>
+                                    <li class="<?php if($this->router->class == 'crew') echo 'active'; ?>"><a href="<?=base_url()?>crew">Tripulação</a></li>
+                                    <li class="<?php if($this->router->class == 'itinerary') echo 'active'; ?>"><a href="<?=base_url()?>itinerary">Percurso</a></li>
+                                    <li class="<?php if($this->router->class == 'donate') echo 'active'; ?>"><a href="<?=base_url()?>donate">Doação</a></li>
+                                    <li class="<?php if($this->router->class == 'accounting') echo 'active'; ?>"><a href="<?=base_url()?>accounting">Contabilidade</a></li>
+                                    <li class="<?php if($this->router->class == 'wishlist') echo 'active'; ?>"><a href="<?=base_url()?>wishlist">Lista de desejos</a></li>
+                                    <li class="<?php if($this->router->class == 'inspirations') echo 'active'; ?>"><a href="<?=base_url()?>inspirations">Inspirações</a></li>
+                                    <li class="<?php if($this->router->class == 'hostus') echo 'active'; ?>"><a href="<?=base_url()?>hostus">Hospede-nos</a></li>
+                                </ul>
+                            </li>
+                            <li class="<?php if($this->router->class == 'articles') echo 'active'; ?>"><a href="<?=base_url()?>articles">Artigos</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Galeria <span class="caret"></span></a>
+                                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                                    <li><a href="<?=base_url()?>audios">Audio</a></li>
+                                    <li><a href="<?=base_url()?>images">Imagem</a></li>
+                                    <li><a href="<?=base_url()?>videos">Vídeo</a></li>
+                                </ul>
+                            </li>                    <li class="<?php if($this->router->class == 'contact') echo 'active'; ?>"><a href="<?=base_url()?>contact">Contato</a></li>
+                            <li class="<?php if($this->router->class == 'services') echo 'active'; ?>"><a href="<?=base_url()?>services">Serviços</a></li>
                         </ul>
-                    </li>
-                    <li class="<?php if($this->router->class == 'articles') echo 'active'; ?>"><a href="<?=base_url()?>articles">Artigos</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Galeria <span class="caret"></span></a>
-                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                            <li><a href="<?=base_url()?>audios">Audio</a></li>
-                            <li><a href="<?=base_url()?>images">Imagem</a></li>
-                            <li><a href="<?=base_url()?>videos">Vídeo</a></li>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="<?=base_url()?>login"><i class="fa fa-sign-in"></i></a></li>
                         </ul>
-                    </li>                    <li class="<?php if($this->router->class == 'contact') echo 'active'; ?>"><a href="<?=base_url()?>contact">Contato</a></li>
-                    <li class="<?php if($this->router->class == 'services') echo 'active'; ?>"><a href="<?=base_url()?>services">Serviços</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="<?=base_url()?>login"><i class="fa fa-sign-in"></i></a></li>
-                </ul>
-                <div class="col-sm-6 col-md-6 pull-right">
-                    <form class="navbar-form" role="search">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
-                            <div class="input-group-btn">
-                            <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
-                            </div>
+                        <div class="col-sm-6 col-md-6 pull-right">
+                            <form class="navbar-form" role="search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search" name="srch-term" id="srch-term">
+                                    <div class="input-group-btn">
+                                    <button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                    </form>
+                    </div><!-- /.navbar-collapse -->
                 </div>
-            </div><!-- /.navbar-collapse -->
+            </div>
         </div><!-- /.container-fluid -->
     </nav>
 

@@ -16,7 +16,9 @@ class Images extends My_Controller {
 
         $css_files = array('css/bootstrap3-button-file');
 
-        $this->template->load($conteudo, null, $css_files, null); // carrega a pagina inicial
+        $js_files = array("js/images");
+
+        $this->template->load($conteudo, $js_files, $css_files, null); // carrega a pagina inicial
 
     }
 
@@ -26,9 +28,9 @@ class Images extends My_Controller {
 
     	$images = $this->images_model->getObjects( $params );
 
-    	header('Content-Type: application/json');
-
-    	echo json_encode($images['digest']);
+        $this->output
+            ->set_content_type('application/json')
+            ->set_output(json_encode($images['digest']));
 
     }
 
