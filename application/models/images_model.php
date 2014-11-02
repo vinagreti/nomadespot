@@ -190,7 +190,7 @@ class Images_model extends CI_Model {
                 // Load Library
                 $this->load->library('s3');
 
-                $this->s3->deleteObject($this->bucket, $object->uri, S3::ACL_PUBLIC_READ)
+                $this->s3->deleteObject($this->bucket, $object->uri, S3::ACL_PUBLIC_READ);
 
                 $res = array( // define a resposta
                     "success" => true // define como success
