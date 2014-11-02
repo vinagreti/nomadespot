@@ -111,6 +111,7 @@ class Images_model extends CI_Model {
                         'name' => $name
                         , 'uri' => $uri
                         ,  'desc' => $desc
+                        , 'aws_file_uri' => $aws_file_uri
                     );
 
                     $this->db->insert('images', $data);
@@ -180,7 +181,7 @@ class Images_model extends CI_Model {
 
         $object =  $this->db->get()->row();
 
-        if(isset($object->uri)){
+        if(isset($object->aws_file_uri)){
 
             $this->db->where('id', $id); // remove o usuario do banco
             $removido = $this->db->delete('images');
@@ -190,7 +191,7 @@ class Images_model extends CI_Model {
                 // Load Library
                 $this->load->library('s3');
 
-                $this->s3->deleteObject($this->bucket, $object->uri, S3::ACL_PUBLIC_READ);
+                $this->s3->deleteObject($this->bucket, $object->aws_file_uri);
 
                 $res = array( // define a resposta
                     "success" => true // define como success

@@ -198,7 +198,11 @@ var images = new function () {
         }
         , removeFromRemote: function(id) {
 
-            var button = screen_container.find('.change-privacy[data-id="'+ id +'"]');
+            console.log(id);
+
+            var button = screen_container.find('.delete-img[data-id="'+ id +'"]');
+
+            console.log(button[0]);
 
             $.ajax({
 
@@ -208,7 +212,9 @@ var images = new function () {
 
             }).done(function (res) {
 
-                screen_container.find('.gallery-thumb[data-id="'+id+'"]').remove();
+                console.log('deletou');
+
+                button.parents('.gallery-thumb').remove();
 
             }).always(function (res) {
 
