@@ -2,17 +2,25 @@
 
 class Images extends My_Controller {
 
-	public function index(){ $this->rest(); }
+	public function index(){
+
+        $conteudo = $this->load->view('images/albuns', false, true);
+
+        $css_files = array('css/bootstrap3-button-file');
+
+        $js_files = array("js/images");
+
+        $this->template->load($conteudo, $js_files, $css_files, null); // carrega a pagina inicial
+
+    }
+
+    public function album($album){ $this->rest(); }
 
     public function getObjects_html() {
 
         $this->load->model("images_model");
 
-        $gpa = $this->images_model->getObjects();
-
-        $data = array('gpa' => $gpa['digest'], 'bucket' => 'guaraniporai');
-
-        $conteudo = $this->load->view('images/index', $data, true);
+        $conteudo = $this->load->view('images/index', false, true);
 
         $css_files = array('css/bootstrap3-button-file');
 
