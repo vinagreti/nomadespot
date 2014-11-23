@@ -67,7 +67,7 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" rel="home" href="<?=base_url()?>" title="nomadespot.com">
-                            <img id="nav_logo" src="<?=base_url()?>assets/img/logo_transparente.gif">
+                            <img id="nav_logo" src="<?=base_url()?>assets/img/logo.png">
                         </a>
                     </div>
 
